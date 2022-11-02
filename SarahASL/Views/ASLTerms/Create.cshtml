@@ -1,0 +1,59 @@
+﻿@model SarahASL.Models.ASLTerm
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>CREATE CONTACT</h1>
+<div class="p-3 border border-2 shadow-lg bg-light">
+    <form asp-action="Create" asp-controller="ASLTerms" enctype="multipart/form-data" method="post">
+        <div class="row g-3 p-2">
+            <div class="col-12 col-md-4">
+                <div class="square-img-container" style="height:50px; width: 50px">
+                    <img class="square-img" src="~/img/defaultVideoImgSrc.jpg" id="contactImage" style="height:50px;width:50px">
+               </div>
+                <div>
+                    <label asp-for="VideoFile" class="control-label"></label>
+                    <input asp-for="VideoFile" type="file" class="form-control" accept=".png,.jpg,.jpeg,.gif,.mp4,.mov,.wmv" onchange="document.getElementById('contactImage').src=window.URL.createObjectURL(this.files[0])">
+                </div>
+            </div>
+
+
+
+            <div class="col-12 col-md-8">
+                <div class="row">
+
+
+                    @*First name, last name, email, phone, address, address2, city, state, zip*@
+
+                    <div class="col-12 col-lg-6 ">
+                        <label asp-for="EnglishPhrase" class="form-label">Written Phrase</label>
+                        <input class="form-control" asp-for="EnglishPhrase">
+                        <span asp-validation-for="EnglishPhrase" class="text-danger"></span>
+                    </div>
+                    <div class="col-12 col-lg-6 mt-3">
+                        <label asp-for="Tags" class="form-label">Tags</label>
+                        <select name="TagId" class="form-select" asp-items="ViewBag.TagList" multiple aria-label="TagList">
+                        </select>
+                    </div>
+                    <div class="col-12 d-flex justify-content-end mt-2">
+                        <button type="submit" class="btn btn-lg btn-primary rounded-pill">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </form>
+</div>
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
